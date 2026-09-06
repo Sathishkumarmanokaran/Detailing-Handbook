@@ -1,0 +1,2597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailing Handbook</title>
+    <link rel="icon" type="image/x-icon" href="Sathishkumar_Manokaran_SM_Logo.png">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --accent: #0d9488;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --border-color: #e2e8f0;
+            --sidebar-bg: #0f172a;
+            --sidebar-text: #94a3b8;
+            --sidebar-hover: #1e293b;
+            --sidebar-active: #0284c7;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Layout Container */
+        .app-layout {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-brand {
+            padding: 24px 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 20px 12px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            color: var(--sidebar-text);
+            border: none;
+            padding: 12px 16px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--sidebar-hover);
+            color: #ffffff;
+        }
+
+        .nav-btn.active {
+            background-color: var(--sidebar-active);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            margin-left: 280px;
+            flex-grow: 1;
+            padding: 30px;
+            background-color: var(--bg-color);
+            min-width: 0;
+        }
+
+        .wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sub-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            background: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .sub-nav-btn {
+            background-color: #f8fafc;
+            color: #0f766e;
+            border: 1px solid #cbd5e1;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .sub-nav-btn:hover {
+            background-color: #14b8a6;
+            color: white;
+            border-color: #14b8a6;
+        }
+
+        .sub-nav-btn.active {
+            background-color: #0f766e;
+            color: white;
+            border-color: #0f766e;
+        }
+
+        .app-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 16px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .sub-header {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sketch-container {
+            background: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .sketch-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sketch-box img {
+            max-height: 220px;
+            max-width: 100%;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 6px;
+            background: #f8fafc;
+        }
+
+        .sketch-box span {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 8px;
+            font-size: 0.92rem;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 85%;
+            padding: 8px;
+            text-align: center;
+            font-size: 0.92rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: #fff;
+            transition: all 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+        .operation-select {
+            background-color: #fef9c3;
+            font-weight: bold;
+            color: #854d0e;
+        }
+
+        .result-row {
+            background-color: #f0fdf4;
+            font-weight: bold;
+            color: #166534;
+        }
+
+        .output-cell {
+            background-color: #f0fdf4;
+            color: #166534;
+            font-weight: 600;
+        }
+
+        .chart-table th {
+            background-color: #f97316;
+            color: white;
+        }
+        
+        .chart-highlight {
+            background-color: #fef08a;
+            font-weight: bold;
+        }
+
+        /* Slotted Hole Dimensions - Excel-style comparison layout */
+        .slot-dimensions-title {
+            text-align: center;
+            color: #334155;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            margin: 2px 0 10px;
+            text-transform: uppercase;
+        }
+
+        .slot-dimensions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            align-items: start;
+        }
+
+        .slot-dimension-block {
+            min-width: 0;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+        }
+
+        .slot-dimension-block .slot-block-title {
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 700;
+            text-align: center;
+            padding: 7px 6px;
+            font-size: 0.82rem;
+            border-bottom: 1px solid #cbd5e1;
+            text-transform: uppercase;
+        }
+
+        .slot-dimension-block table {
+            table-layout: fixed;
+        }
+
+        .slot-dimension-block th {
+            background: #5f8fae;
+            color: #ffffff;
+            font-size: 0.76rem;
+            line-height: 1.15;
+            padding: 5px 4px;
+            font-weight: 600;
+        }
+
+        .slot-dimension-block td {
+            font-size: 0.78rem;
+            padding: 4px 4px;
+            line-height: 1.15;
+            white-space: nowrap;
+        }
+
+        .slot-dimension-block tbody tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        .slot-dimension-block tbody tr:nth-child(odd) td {
+            background: #ffffff;
+        }
+
+        .slot-dimension-note {
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: #64748b;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .slot-dimensions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Responsive Breakpoint */
+        @media (max-width: 768px) {
+            .app-layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+        }
+
+
+        /* =========================================================
+           Detailing Handbook - Responsive Professional UI Refresh
+           ========================================================= */
+        :root {
+            --primary: #0b82c9;
+            --primary-dark: #075985;
+            --accent: #0f766e;
+            --bg-color: #eef3f8;
+            --card-bg: #ffffff;
+            --text-main: #243447;
+            --text-muted: #64748b;
+            --border-color: #dbe4ee;
+            --sidebar-bg: #0b1426;
+            --sidebar-text: #9aa9bc;
+            --sidebar-hover: #17243a;
+            --sidebar-active: #0787cf;
+            --radius: 14px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-size: 15px;
+            line-height: 1.45;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        button, input, select { font: inherit; }
+        button { -webkit-tap-highlight-color: transparent; }
+
+        .app-layout { min-height: 100dvh; }
+
+        .sidebar {
+            width: 270px;
+            box-shadow: 8px 0 28px rgba(15, 23, 42, .08);
+            border-right: 1px solid rgba(255,255,255,.06);
+        }
+
+        .sidebar-brand {
+            min-height: 74px;
+            padding: 18px 20px;
+            font-size: 1.12rem;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: linear-gradient(180deg, #0b1426 0%, #0d172b 100%);
+        }
+
+        .nav-bar { padding: 16px 12px 24px; gap: 5px; }
+        .nav-btn {
+            min-height: 46px;
+            padding: 11px 14px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            font-size: .9rem;
+        }
+        .nav-btn span:first-child {
+            width: 24px;
+            flex: 0 0 24px;
+            text-align: center;
+        }
+        .nav-btn:hover { transform: translateX(2px); }
+        .nav-btn.active { box-shadow: 0 7px 18px rgba(2,132,199,.24); }
+
+        .main-content {
+            margin-left: 270px;
+            padding: clamp(16px, 2.4vw, 34px);
+            min-height: 100dvh;
+        }
+
+        .wrapper {
+            width: min(100%, 1280px);
+            gap: 18px;
+        }
+
+        .card {
+            border-radius: var(--radius);
+            box-shadow: 0 8px 24px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04);
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            font-size: clamp(1rem, 1.3vw, 1.12rem);
+            background: linear-gradient(135deg, #0b86c9, #075985);
+        }
+
+        .sub-nav {
+            gap: 8px;
+            padding: 8px;
+            margin: 0 0 14px;
+            position: sticky;
+            top: 8px;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,.92);
+            box-shadow: 0 5px 18px rgba(15,23,42,.05);
+        }
+        .sub-nav-btn {
+            min-height: 38px;
+            padding: 8px 13px;
+            border-radius: 8px;
+        }
+
+        .sketch-container {
+            padding: 18px;
+            gap: clamp(18px, 4vw, 42px);
+        }
+        .sketch-box { min-width: 180px; max-width: 360px; }
+        .sketch-box img {
+            width: auto;
+            max-width: min(100%, 320px);
+            max-height: 210px;
+            object-fit: contain;
+        }
+
+        /* All data tables become independently scrollable on small screens. */
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+        .table-scroll table { min-width: 620px; }
+        .table-scroll::-webkit-scrollbar { height: 7px; }
+        .table-scroll::-webkit-scrollbar-thumb { background: #b8c6d5; border-radius: 99px; }
+
+        table { font-variant-numeric: tabular-nums; }
+        th, td { padding: 9px 8px; }
+        th { white-space: normal; }
+        td { white-space: normal; }
+
+        input, select {
+            width: min(100%, 220px);
+            min-height: 40px;
+            padding: 9px 10px;
+            border-radius: 8px;
+        }
+        input[type="number"] { max-width: 160px; }
+
+        .slot-dimensions-grid { gap: 14px; }
+        .slot-dimension-block { border-radius: 10px; overflow: hidden; }
+        .slot-dimension-block table { min-width: 0; }
+        .slot-dimension-block th { padding: 7px 5px; }
+        .slot-dimension-block td { padding: 6px 5px; }
+
+        /* Better touch targets and focus visibility. */
+        @media (hover: none) {
+            .nav-btn:hover { transform: none; }
+        }
+        :focus-visible {
+            outline: 3px solid rgba(14,165,233,.35);
+            outline-offset: 2px;
+        }
+
+        /* Large tablets / small laptops */
+        @media (max-width: 1100px) {
+            .sidebar { width: 235px; }
+            .main-content { margin-left: 235px; padding: 22px; }
+            .nav-btn { padding-left: 11px; padding-right: 11px; }
+            .sketch-box { min-width: 150px; }
+        }
+
+        /* Tablets: compact fixed sidebar remains usable. */
+        @media (max-width: 900px) and (min-width: 769px) {
+            .sidebar { width: 210px; }
+            .main-content { margin-left: 210px; padding: 18px; }
+            .sidebar-brand { padding-left: 14px; padding-right: 14px; }
+            .nav-btn { font-size: .82rem; }
+            .slot-dimensions-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Phones: turn the sidebar into a compact top navigation. */
+        @media (max-width: 768px) {
+            body { display: block; }
+            .app-layout { display: block; }
+            .sidebar {
+                position: sticky;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                z-index: 1000;
+                box-shadow: 0 5px 20px rgba(15,23,42,.14);
+            }
+            .sidebar-brand {
+                min-height: 58px;
+                padding: 13px 16px;
+                font-size: 1rem;
+                border-bottom: 1px solid rgba(255,255,255,.08);
+            }
+            .nav-bar {
+                flex-direction: row;
+                overflow-x: auto;
+                overflow-y: hidden;
+                padding: 7px 10px 9px;
+                gap: 6px;
+                scrollbar-width: none;
+                flex-grow: 0;
+            }
+            .nav-bar::-webkit-scrollbar { display: none; }
+            .nav-btn {
+                flex: 0 0 auto;
+                width: auto;
+                min-height: 40px;
+                padding: 8px 11px;
+                border-radius: 9px;
+                white-space: nowrap;
+                font-size: .78rem;
+            }
+            .nav-btn span:first-child { width: auto; flex-basis: auto; }
+            .main-content {
+                margin-left: 0;
+                padding: 12px;
+                min-height: auto;
+            }
+            .wrapper { gap: 12px; }
+            .card { border-radius: 11px; }
+            .card-header { padding: 13px 15px; }
+            .sub-nav {
+                position: static;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                scrollbar-width: none;
+                margin-bottom: 10px;
+            }
+            .sub-nav::-webkit-scrollbar { display: none; }
+            .sub-nav-btn { flex: 0 0 auto; white-space: nowrap; }
+            .sketch-container { padding: 14px 10px; gap: 14px; }
+            .sketch-box { min-width: 0; width: min(47%, 250px); }
+            .sketch-box img { max-height: 145px; max-width: 100%; }
+            .sketch-box span { font-size: .76rem; }
+            .slot-dimensions-title { font-size: .96rem; }
+            .slot-dimension-block th { font-size: .72rem; }
+            .slot-dimension-block td { font-size: .74rem; }
+            .slot-dimension-note { font-size: .72rem; padding: 0 8px 4px; }
+            input, select { min-height: 42px; font-size: .95rem; }
+        }
+
+        @media (max-width: 480px) {
+            .main-content { padding: 8px; }
+            .sidebar-brand { font-size: .94rem; }
+            .nav-btn { font-size: .74rem; padding: 8px 10px; }
+            .sketch-box { width: 100%; }
+            .sketch-box img { max-height: 170px; }
+            .sketch-container { gap: 16px; }
+            .card-header { font-size: .98rem; }
+            th, td { font-size: .82rem; padding: 8px 6px; }
+            .slot-dimensions-grid { gap: 10px; }
+        }
+
+        /* Respect users who prefer reduced motion. */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+            }
+        }
+
+    
+/* =========================================================
+   Detailing Handbook - Collapsible Navigation
+   ========================================================= */
+:root {
+    --sidebar-width: 270px;
+    --nav-toggle-size: 46px;
+}
+
+.nav-toggle {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1200;
+    width: var(--nav-toggle-size);
+    height: var(--nav-toggle-size);
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 12px;
+    background: #0b1426;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(15,23,42,.22);
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    font-size: 22px;
+    line-height: 1;
+}
+.nav-toggle:hover {
+    background: #075985;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 28px rgba(15,23,42,.28);
+}
+.nav-toggle:active { transform: scale(.97); }
+
+.nav-toggle .toggle-icon {
+    display: block;
+    transition: transform .25s ease;
+}
+body.nav-open .nav-toggle .toggle-icon {
+    transform: rotate(90deg);
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    transition: transform .28s ease, box-shadow .28s ease;
+}
+.main-content {
+    margin-left: var(--sidebar-width);
+    transition: margin-left .28s ease, padding .28s ease;
+}
+
+body.nav-collapsed .sidebar {
+    transform: translateX(calc(-1 * var(--sidebar-width) - 12px));
+    box-shadow: none;
+}
+body.nav-collapsed .main-content {
+    margin-left: 0;
+}
+
+.nav-backdrop {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    :root { --sidebar-width: 235px; }
+}
+
+@media (max-width: 900px) {
+    :root { --sidebar-width: min(82vw, 300px); }
+
+    .nav-toggle {
+        top: 12px;
+        left: 12px;
+        width: 44px;
+        height: 44px;
+        border-radius: 11px;
+    }
+
+    .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        height: 100dvh !important;
+        width: var(--sidebar-width) !important;
+        transform: translateX(-105%);
+        z-index: 1100;
+        box-shadow: 12px 0 34px rgba(15,23,42,.28);
+    }
+
+    body.nav-open .sidebar {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        padding-top: 72px !important;
+    }
+
+    .nav-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 1050;
+        background: rgba(2, 8, 23, .46);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+    }
+
+    body.nav-open .nav-backdrop {
+        display: block;
+    }
+
+    body.nav-collapsed .sidebar {
+        transform: translateX(-105%);
+    }
+}
+
+@media (min-width: 901px) {
+    /* Keep desktop layout clean: toggle remains available at all sizes. */
+    .sidebar-brand {
+        padding-left: 72px !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sidebar, .main-content, .nav-toggle, .nav-toggle .toggle-icon {
+        transition: none !important;
+    }
+}
+
+</style>
+</head>
+<body>
+<button class="nav-toggle" id="navToggle" type="button"
+        aria-label="Show or hide navigation"
+        aria-controls="detailNavigation"
+        aria-expanded="true">
+    <span class="toggle-icon" aria-hidden="true">☰</span>
+</button>
+<div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
+
+<div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="detailNavigation" aria-label="Handbook navigation">
+        <div class="sidebar-brand">
+            <span>📚 Detailing Handbook</span>
+        </div>
+        <div class="nav-bar">
+            <button class="nav-btn active" onclick="switchTab('boltEdgeDistanceHub', this)">
+                <span>🔩</span> Bolt Edge Distance
+            </button>
+            <button class="nav-btn" onclick="switchTab('slotDetailsHub', this)">
+                <span>🕳️</span> Slot Details
+            </button>
+            <button class="nav-btn" onclick="switchTab('calculator', this)">
+                <span>🧮</span> Imperial Calculator & Conversions
+            </button>
+            <button class="nav-btn" onclick="switchTab('fractionChart', this)">
+                <span>📊</span> Fraction to Decimal Chart
+            </button>
+            <button class="nav-btn" onclick="switchTab('elbowsHub', this)">
+                <span>🔄</span> Elbows 90° STD
+            </button>
+            <button class="nav-btn" onclick="switchTab('teklaHub', this)">
+                <span>🔗</span> Tekla Component Numbers
+            </button>
+            <button class="nav-btn" onclick="switchTab('gaugeMetalHub', this)">
+                <span>📏</span> Gage Metal Thickness
+            </button>
+            <button class="nav-btn" onclick="switchTab('filletEncroachmentHub', this)">
+                <span>📐</span> Fillet Encroachment
+            </button>
+            <button class="nav-btn" onclick="switchTab('plateBendingHub', this)">
+                <span>〰️</span> Plate Bending Radius
+            </button>
+            <button class="nav-btn" onclick="switchTab('textSizeHub', this)">
+                <span>📝</span> Text Size on Drawings
+            </button>
+            <button class="nav-btn" onclick="switchTab('nucorStdGratingTreadHub', this)">
+                <span>🪜</span> Nucor STD Grating Tread
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Panel -->
+    <main class="main-content">
+        <div class="wrapper">
+
+            <!-- TAB 0: Bolt Edge Distance -->
+            <div id="boltEdgeDistanceHub" class="app-section">
+                <div class="card">
+                    <div class="card-header">Bolt Edge Distance Specifications & Dimensions</div>
+                    <div style="padding: 15px;">
+                        <div class="sub-nav">
+                            <button class="sub-nav-btn active" onclick="switchBoltSub('sub_bolt_metric', this)">Metric</button>
+                            <button class="sub-nav-btn" onclick="switchBoltSub('sub_bolt_imperial', this)">Imperial</button>
+                        </div>
+
+                        <!-- Sub 1: Bolt Edge Distance (Metric) -->
+                        <div id="sub_bolt_metric" class="sub-bolt-section">
+                            <div class="sketch-container">
+                                <div class="sketch-box">
+                                    <img src="Attachments\Rolled and Sheared Edge.png" alt="Rolled and Sheared Edge Sketch">
+                                    <span>Rolled and Sheared Edge Reference</span>
+                                </div>
+                            </div>
+                            <h3 style="text-align: center; color: var(--primary-dark); font-size: 1.05rem; margin-bottom: 15px;">Minimum edge distance for bolt holes, mm</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Bolt diameter mm</th>
+                                        <th>Bolt diameter in</th>
+                                        <th>Minimum edge distance At sheared edge</th>
+                                        <th>Minimum edge distance At rolled or sawn edges, or edges cut by gas*, plasma, laser, or water jet</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <script>
+                                        const boltMetricData = [
+                                            {bm: "—", bi: "5/8", me: "28", re: "22"},
+                                            {bm: "16", bi: "—", me: "28", re: "22"},
+                                            {bm: "—", bi: "3/4", me: "32", re: "25"},
+                                            {bm: "20", bi: "—", me: "34", re: "26"},
+                                            {bm: "—", bi: "7/8", me: "38 †", re: "28"},
+                                            {bm: "22", bi: "—", me: "38", re: "28"},
+                                            {bm: "24", bi: "—", me: "42", re: "30"},
+                                            {bm: "—", bi: "1", me: "44 †", re: "32"},
+                                            {bm: "27", bi: "—", me: "48", re: "34"},
+                                            {bm: "—", bi: "1-1/8", me: "51", re: "38"},
+                                            {bm: "30", bi: "—", me: "52", re: "38"},
+                                            {bm: "—", bi: "1-1/4", me: "57", re: "41"},
+                                            {bm: "36", bi: "—", me: "64", re: "46"},
+                                            {bm: "Over 36", bi: "Over 1-1/4", me: "1.75 × diameter", re: "1.25 × diameter"}
+                                        ];
+                                        boltMetricData.forEach(row => {
+                                            document.write(`<tr><td>${row.bm}</td><td>${row.bi}</td><td>${row.me}</td><td>${row.re}</td></tr>`);
+                                        });
+                                    </script>
+                                </tbody>
+                            </table>
+                            <div style="font-size: 0.82rem; color: #64748b; margin-top: 10px; text-align: center;">
+                                * Gas cut edges processed with machine gas cutting. † Values include standard historical adjustment.
+                            </div>
+                        </div>
+
+                        <!-- Sub 2: Bolt Edge Distance (Imperial) -->
+                        <div id="sub_bolt_imperial" class="sub-bolt-section hidden">
+                            <div class="sketch-container">
+                                <div class="sketch-box">
+                                    <img src="Attachments\Rolled and Sheared Edge.png" alt="Rolled and Sheared Edge Sketch">
+                                    <span>Rolled and Sheared Edge Reference</span>
+                                </div>
+                            </div>
+                            <h3 style="text-align: center; color: var(--primary-dark); font-size: 1.05rem; margin-bottom: 15px;">MINIMUM EDGE DISTANCE inch</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>BOLT DIA</th>
+                                        <th>SHEARED</th>
+                                        <th>ROLLED</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <script>
+                                        const boltImperialData = [
+                                            {dia: "1/2\"", sheared: "7/8\"", rolled: "3/4\""},
+                                            {dia: "5/8\"", sheared: "1 1/8\"", rolled: "7/8\""},
+                                            {dia: "3/4\"", sheared: "1 1/4\"", rolled: "1\""},
+                                            {dia: "7/8\"", sheared: "1 1/2\"", rolled: "1 1/8\""},
+                                            {dia: "1\"", sheared: "1 3/4\"", rolled: "1 1/4\""},
+                                            {dia: "1 1/8\"", sheared: "2\"", rolled: "1 1/2\""},
+                                            {dia: "1 1/4\"", sheared: "2 1/4\"", rolled: "1 5/8\""}
+                                        ];
+                                        boltImperialData.forEach(row => {
+                                            document.write(`<tr><td>${row.dia}</td><td>${row.sheared}</td><td>${row.rolled}</td></tr>`);
+                                        });
+                                    </script>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 00 (NEW): Slot Details -->
+            <div id="slotDetailsHub" class="app-section hidden">
+                <div class="card">
+                    <div class="card-header">Slotted Hole Dimensions</div>
+                    <div style="padding: 15px;">
+                        <div class="sub-nav">
+                            <button class="sub-nav-btn active" onclick="switchSlotSub('sub_slot_canadian', this)">Canadian STD (CSA S16)</button>
+                            <button class="sub-nav-btn" onclick="switchSlotSub('sub_slot_aisc', this)">AISC STD (AISC 360 / J3.3)</button>
+                        </div>
+
+                        <!-- Sub 1: Canadian STD -->
+                        <div id="sub_slot_canadian" class="sub-slot-section">
+                            <div class="sketch-container">
+                                <div class="sketch-box">
+                                    <img src="Attachments\SLOT.png" alt="Slot Hole Reference">
+                                    <span>Slot Geometry Reference</span>
+                                </div>
+                                <div class="sketch-box">
+                                    <img src="Attachments\Slot Edge distance.png" alt="Slot Edge Distance Reference">
+                                    <span>Slot Edge Distance Reference</span>
+                                </div>
+                            </div>
+
+                            <h3 style="text-align: center; color: var(--primary-dark); font-size: 1.05rem; margin-bottom: 15px;">Canadian Standards (CSA S16) - Standard Slot Dimensions</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 15px; text-align: center;">
+                                Slotted holes are permitted in bolted joints in accordance with CSA S16. Short slots may be used without regard to direction of loading in bearing-type connections, while long slots require careful consideration of load direction and washer requirements.
+                            </p>
+
+                            <div class="slot-dimensions-grid">
+                                <!-- Imperial nominal bolt / short slot -->
+                                <div class="slot-dimension-block">
+                                    <div class="slot-block-title">IMPERIAL NOMINAL BOLT</div>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Nominal Bolt Diameter<br>(in)</th>
+                                                <th>Slot Width, A<br>(mm)</th>
+                                                <th>Slot Length, B<br>(mm)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>5/8</td><td>18</td><td>A &lt; B ≤ 22</td></tr>
+                                            <tr><td>3/4</td><td>21</td><td>A &lt; B ≤ 25</td></tr>
+                                            <tr><td>7/8</td><td>24</td><td>A &lt; B ≤ 29***</td></tr>
+                                            <tr><td>1</td><td>27</td><td>A &lt; B ≤ 33***</td></tr>
+                                            <tr><td>1-1/8</td><td>31</td><td>A &lt; B ≤ 39</td></tr>
+                                            <tr><td>1-1/4</td><td>34</td><td>A &lt; B ≤ 42</td></tr>
+                                            <tr><td>1-1/2</td><td>40</td><td>A &lt; B ≤ 48</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Imperial long slot -->
+                                <div class="slot-dimension-block">
+                                    <div class="slot-block-title">LONG SLOT DIMENSIONS (IMPERIAL)</div>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Nominal Bolt Diameter<br>(in)</th>
+                                                <th>Slot Width, A<br>(mm)</th>
+                                                <th>Slot Length, B<br>(mm)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>5/8</td><td>18</td><td>22 &lt; B ≤ 40</td></tr>
+                                            <tr><td>3/4</td><td>21</td><td>25 &lt; B ≤ 50</td></tr>
+                                            <tr><td>7/8</td><td>24</td><td>29 &lt; B ≤ 56</td></tr>
+                                            <tr><td>1</td><td>27</td><td>33 &lt; B ≤ 64</td></tr>
+                                            <tr><td>1-1/8</td><td>31</td><td>39 &lt; B ≤ 71</td></tr>
+                                            <tr><td>1-1/4</td><td>34</td><td>42 &lt; B ≤ 79</td></tr>
+                                            <tr><td>1-1/2</td><td>40</td><td>48 &lt; B ≤ 95</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Metric short slot -->
+                                <div class="slot-dimension-block">
+                                    <div class="slot-block-title">SHORT NOMINAL BOLT (mm)</div>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Nominal Bolt Diameter<br>(mm)</th>
+                                                <th>Slot Width, A<br>(mm)</th>
+                                                <th>Slot Length, B<br>(mm)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>16</td><td>18</td><td>22</td></tr>
+                                            <tr><td>20</td><td>22</td><td>26</td></tr>
+                                            <tr><td>22</td><td>24</td><td>28</td></tr>
+                                            <tr><td>24</td><td>26</td><td>32</td></tr>
+                                            <tr><td>27</td><td>29</td><td>37</td></tr>
+                                            <tr><td>30</td><td>32</td><td>40</td></tr>
+                                            <tr><td>36</td><td>38</td><td>46</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Metric long slot -->
+                                <div class="slot-dimension-block">
+                                    <div class="slot-block-title">LONG SLOT DIMENSIONS (METRIC)</div>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Nominal Bolt Diameter<br>(mm)</th>
+                                                <th>Slot Width, A<br>(mm)</th>
+                                                <th>Slot Length, B<br>(mm)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>16</td><td>18</td><td>40</td></tr>
+                                            <tr><td>20</td><td>22</td><td>50</td></tr>
+                                            <tr><td>22</td><td>24</td><td>55</td></tr>
+                                            <tr><td>24</td><td>26</td><td>60</td></tr>
+                                            <tr><td>27</td><td>29</td><td>67.5</td></tr>
+                                            <tr><td>30</td><td>32</td><td>75</td></tr>
+                                            <tr><td>36</td><td>38</td><td>90</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="slot-dimension-note">
+                                *** Values marked with three asterisks are shown exactly as in the supplied comparison reference.
+                            </div>
+                        </div>
+
+                        <!-- Sub 2: AISC STD -->
+                        <div id="sub_slot_aisc" class="sub-slot-section hidden">
+                            <div class="sketch-container">
+                                <div class="sketch-box">
+                                    <img src="Attachments\SLOT.png" alt="Slot Hole Reference">
+                                    <span>Slot Geometry Reference</span>
+                                </div>
+                                <div class="sketch-box">
+                                    <img src="Attachments\Slot Edge distance.png" alt="Slot Edge Distance Reference">
+                                    <span>Slot Edge Distance Reference</span>
+                                </div>
+                            </div>
+                            <h3 style="text-align: center; color: var(--primary-dark); font-size: 1.05rem; margin-bottom: 15px;">AISC Standards (AISC 360 Table J3.3) - Nominal Hole Dimensions</h3>
+                            <p style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 15px; text-align: center;">
+                                According to AISC Specification Section J3.3, maximum hole dimensions for standard, oversized, short-slotted, and long-slotted holes are established to facilitate erection tolerances and slip-critical or bearing connection design.
+                            </p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Bolt Diameter, in.</th>
+                                        <th>Standard<br>(Dia.)</th>
+                                        <th>Oversize<br>(Dia.)</th>
+                                        <th>Short-Slot<br>(Width × Length)</th>
+                                        <th>Long-Slot<br>(Width × Length)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <script>
+                                        const slotAiscData = [
+                                            {bolt: "1/2\"", std: "9/16\"", over: "5/8\"", short: "9/16\" × 11/16\"", long: "9/16\" × 1 1/4\""},
+                                            {bolt: "5/8\"", std: "11/16\"", over: "13/16\"", short: "11/16\" × 7/8\"", long: "11/16\" × 1 9/16\""},
+                                            {bolt: "3/4\"", std: "13/16\"", over: "15/16\"", short: "13/16\" × 1\"", long: "13/16\" × 1 7/8\""},
+                                            {bolt: "7/8\"", std: "15/16\"", over: "1 1/16\"", short: "15/16\" × 1 1/8\"", long: "15/16\" × 2 3/16\""},
+                                            {bolt: "1\"", std: "1 1/8\"", over: "1 1/4\"", short: "1 1/8\" × 1 5/16\"", long: "1 1/8\" × 2 1/2\""},
+                                            {bolt: "≥ 1 1/8\"", std: "d + 1/8\"", over: "d + 5/16\"", short: "(d + 1/8\") × (d + 3/8\")", long: "(d + 1/8\") × 2.5d"}
+                                        ];
+                                        slotAiscData.forEach(row => {
+                                            document.write(`<tr><td>${row.bolt}</td><td>${row.std}</td><td>${row.over}</td><td>${row.short}</td><td>${row.long}</td></tr>`);
+                                        });
+                                    </script>
+                                </tbody>
+                            </table>
+                            <div style="font-size: 0.82rem; color: #64748b; margin-top: 10px; text-align: center;">
+                                Note: Short-slotted holes can be used in any direction. Long-slotted holes require the axis of the slot to be normal to the direction of the load for bearing connections.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 1: Imperial Calculator -->
+            <div id="calculator" class="app-section hidden">
+                <!-- Area Unit Converter (Sq.m, Sq.ft, Sq.mm, Sq.in) -->
+                <div class="card">
+                    <div class="card-header">Area Unit Converter (Sq.m ⇄ Sq.ft ⇄ Sq.mm ⇄ Sq.in)</div>
+                    <table>
+                        <tr>
+                            <th style="background-color: #fef08a; color: #854d0e;">Sq.m</th>
+                            <th style="background-color: #fef08a; color: #854d0e;">Sq.ft</th>
+                            <th style="background-color: #fef08a; color: #854d0e;">Sq.mm</th>
+                            <th style="background-color: #fef08a; color: #854d0e;">Sq.in</th>
+                        </tr>
+                        <tr>
+                            <td><input type="number" id="sq_m_input" value="1" oninput="convertArea('sq_m')"></td>
+                            <td><input type="number" id="sq_ft_input" value="10.7639" oninput="convertArea('sq_ft')"></td>
+                            <td><input type="number" id="sq_mm_input" value="1000000" oninput="convertArea('sq_mm')"></td>
+                            <td><input type="number" id="sq_in_input" value="1550.0031" oninput="convertArea('sq_in')"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Imperial Arithmetic Calculator</div>
+                    <table>
+                        <tr>
+                            <th style="width: 20%;">Operation</th>
+                            <th style="width: 25%;">Feet</th>
+                            <th style="width: 25%;">Inch (0-11)</th>
+                            <th style="width: 30%;">Fraction (1/16)</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select id="arith_op" class="operation-select" onchange="calculateArithmetic()">
+                                    <option value="add">Add (+)</option>
+                                    <option value="sub">Subtract (-)</option>
+                                    <option value="mul">Multiply (×)</option>
+                                    <option value="div">Divide (÷)</option>
+                                </select>
+                            </td>
+                            <td><input type="number" id="ar_ft1" value="5" oninput="calculateArithmetic()"></td>
+                            <td><input type="number" id="ar_in1" value="6" min="0" max="11" oninput="calculateArithmetic()"></td>
+                            <td>
+                                <select id="ar_fr1" onchange="calculateArithmetic()">
+                                    <script>
+                                        const fractions16 = [
+                                            {val: 0, label: "0"}, {val: 1, label: "1/16"}, {val: 2, label: "1/8"},
+                                            {val: 3, label: "3/16"}, {val: 4, label: "1/4"}, {val: 5, label: "5/16"},
+                                            {val: 6, label: "3/8"}, {val: 7, label: "7/16"}, {val: 8, label: "1/2"},
+                                            {val: 9, label: "9/16"}, {val: 10, label: "5/8"}, {val: 11, label: "11/16"},
+                                            {val: 12, label: "3/4"}, {val: 13, label: "13/16"}, {val: 14, label: "7/8"},
+                                            {val: 15, label: "15/16"}
+                                        ];
+                                        fractions16.forEach(f => {
+                                            let sel = (f.val === 8) ? 'selected' : '';
+                                            document.write(`<option value="${f.val}" ${sel}>${f.label}</option>`);
+                                        });
+                                    </script>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="sub-header" style="border:none;">Value 2 / Factor</td>
+                            <td><input type="number" id="ar_ft2" value="1" oninput="calculateArithmetic()"></td>
+                            <td><input type="number" id="ar_in2" value="11" min="0" max="11" oninput="calculateArithmetic()"></td>
+                            <td>
+                                <select id="ar_fr2" onchange="calculateArithmetic()">
+                                    <script>
+                                        fractions16.forEach(f => {
+                                            let sel = (f.val === 2) ? 'selected' : '';
+                                            document.write(`<option value="${f.val}" ${sel}>${f.label}</option>`);
+                                        });
+                                    </script>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="result-row">
+                            <td>Result</td>
+                            <td id="res_ft">0</td>
+                            <td id="res_in">0</td>
+                            <td id="res_fr">0</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Unit Conversion: mm to Imperial</div>
+                    <table>
+                        <tr>
+                            <th>Input (mm)</th>
+                            <th>Feet (ft)</th>
+                            <th>Inches (0-11)</th>
+                            <th>Fraction (fr)</th>
+                        </tr>
+                        <tr>
+                            <td><input type="number" id="mm_input" value="673" oninput="convertMmToImperial()"></td>
+                            <td class="output-cell" id="mm_to_ft">2</td>
+                            <td class="output-cell" id="mm_to_in">2</td>
+                            <td class="output-cell" id="mm_to_fr">1/2</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Unit Conversion: Imperial to mm</div>
+                    <table>
+                        <tr>
+                            <th>Feet (ft)</th>
+                            <th>Inches (0-11)</th>
+                            <th>Fraction (fr)</th>
+                            <th>Result (mm)</th>
+                        </tr>
+                        <tr>
+                            <td><input type="number" id="ft_in_ft" value="10" oninput="convertImperialToMm()"></td>
+                            <td><input type="number" id="ft_in_in" value="8" min="0" max="11" oninput="convertImperialToMm()"></td>
+                            <td>
+                                <select id="ft_in_fr" onchange="convertImperialToMm()">
+                                    <script>
+                                        fractions16.forEach(f => {
+                                            document.write(`<option value="${f.val}">${f.label}</option>`);
+                                        });
+                                    </script>
+                                </select>
+                            </td>
+                            <td class="output-cell" id="ft_to_mm_result">3251.20</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Unit Conversion: Feet to Inches</div>
+                    <table>
+                        <tr>
+                            <th>Feet (ft)</th>
+                            <th>Total Inches (in)</th>
+                        </tr>
+                        <tr>
+                            <td><input type="number" id="ft_only_input" value="25" oninput="convertFeetToInches()"></td>
+                            <td class="output-cell" id="ft_to_in_result">300.00</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Unit Conversion: kg ⇄ lbf</div>
+                    <table>
+                        <tr>
+                            <th style="background-color: #fef08a; color: #854d0e;">kg</th>
+                            <th style="background-color: #fef08a; color: #854d0e;">lbf</th>
+                        </tr>
+                        <tr>
+                            <td><input type="number" id="kg_input" value="100" oninput="convertWeight('kg')"></td>
+                            <td><input type="number" id="lbf_input" value="220.46" oninput="convertWeight('lbf')"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 2: Fraction to Decimal Chart -->
+            <div id="fractionChart" class="app-section hidden">
+                <div class="card">
+                    <div class="card-header">Fraction to Decimal & Millimeter Reference Chart</div>
+                    <div style="padding: 15px; overflow-x: auto;">
+                        <table class="chart-table" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Fraction</th>
+                                    <th>INCHES</th>
+                                    <th>MILLIMETERS</th>
+                                    <th style="width: 5px; background: transparent; border: none;"></th>
+                                    <th>Fraction</th>
+                                    <th>INCHES</th>
+                                    <th>MILLIMETERS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <script>
+                                    const chartData = [
+                                        {f1: "1/64", i1: ".015625", m1: ".3969", f2: "33/64", i2: ".515625", m2: "13.096"},
+                                        {f1: "1/32", i1: ".03125", m1: ".7938", f2: "17/32", i2: ".53125", m2: "13.493"},
+                                        {f1: "3/64", i1: ".046875", m1: "1.1906", f2: "35/64", i2: ".546875", m2: "13.890"},
+                                        {f1: "1/16", i1: ".0625", m1: "1.5875", f2: "9/16", i2: ".5625", m2: "14.287", highlight1: true, highlight2: true},
+                                        {f1: "5/64", i1: ".078125", m1: "1.9844", f2: "37/64", i2: ".578125", m2: "14.684"},
+                                        {f1: "3/32", i1: ".09375", m1: "2.3813", f2: "19/32", i2: ".59375", m2: "15.081"},
+                                        {f1: "7/64", i1: ".109375", m1: "2.7781", f2: "39/64", i2: ".609375", m2: "15.478"},
+                                        {f1: "1/8", i1: ".125", m1: "3.1750", f2: "5/8", i2: ".625", m2: "15.875", highlight1: true, highlight2: true},
+                                        {f1: "9/64", i1: ".140625", m1: "3.5719", f2: "41/64", i2: ".640625", m2: "16.271"},
+                                        {f1: "5/32", i1: ".15625", m1: "3.9688", f2: "21/32", i2: ".65625", m2: "16.668"},
+                                        {f1: "11/64", i1: ".171875", m1: "4.3656", f2: "43/64", i2: ".671875", m2: "17.065"},
+                                        {f1: "3/16", i1: ".1875", m1: "4.7625", f2: "11/16", i2: ".6875", m2: "17.462", highlight1: true, highlight2: true},
+                                        {f1: "13/64", i1: ".203125", m1: "5.1594", f2: "45/64", i2: ".703125", m2: "17.859"},
+                                        {f1: "7/32", i1: ".21875", m1: "5.5563", f2: "23/32", i2: ".71875", m2: "18.256"},
+                                        {f1: "15/64", i1: ".234375", m1: "5.9531", f2: "47/64", i2: ".734375", m2: "18.653"},
+                                        {f1: "1/4", i1: ".250", m1: "6.3500", f2: "3/4", i2: ".750", m2: "19.050", highlight1: true, highlight2: true},
+                                        {f1: "17/64", i1: ".265625", m1: "6.7469", f2: "49/64", i2: ".765625", m2: "19.447"},
+                                        {f1: "9/32", i1: ".28125", m1: "7.1438", f2: "25/32", i2: ".78125", m2: "19.843"},
+                                        {f1: "19/64", i1: ".296875", m1: "7.5406", f2: "51/64", i2: ".796875", m2: "20.240"},
+                                        {f1: "5/16", i1: ".3125", m1: "7.9375", f2: "13/16", i2: ".8125", m2: "20.6375", highlight1: true, highlight2: true},
+                                        {f1: "21/64", i1: ".328125", m1: "8.3344", f2: "53/64", i2: ".828125", m2: "21.0345"},
+                                        {f1: "11/32", i1: ".34375", m1: "8.7313", f2: "27/32", i2: ".84375", m2: "21.431"},
+                                        {f1: "23/64", i1: ".359375", m1: "9.1282", f2: "55/64", i2: ".859375", m2: "21.8282"},
+                                        {f1: "3/8", i1: ".375", m1: "9.5250", f2: "7/8", i2: ".875", m2: "22.2251", highlight1: true, highlight2: true},
+                                        {f1: "25/64", i1: ".390625", m1: "9.9219", f2: "57/64", i2: ".890625", m2: "22.6220"},
+                                        {f1: "13/32", i1: ".40625", m1: "10.3188", f2: "29/32", i2: ".90625", m2: "23.0188"},
+                                        {f1: "27/64", i1: ".421875", m1: "10.7157", f2: "59/64", i2: ".921875", m2: "23.4157"},
+                                        {f1: "7/16", i1: ".4375", m1: "11.1125", f2: "15/16", i2: ".9375", m2: "23.8126", highlight1: true, highlight2: true},
+                                        {f1: "29/64", i1: ".453125", m1: "11.5094", f2: "61/64", i2: ".953125", m2: "24.2095"},
+                                        {f1: "15/32", i1: ".46875", m1: "11.9063", f2: "31/32", i2: ".96875", m2: "24.6063"},
+                                        {f1: "31/64", i1: ".484375", m1: "12.3032", f2: "63/64", i2: ".984375", m2: "25.0032"},
+                                        {f1: "1/2", i1: ".500", m1: "12.7001", f2: "1", i2: "1.000", m2: "25.4001", highlight1: true, highlight2: true}
+                                    ];
+
+                                    chartData.forEach(row => {
+                                        let cls1 = row.highlight1 ? 'chart-highlight' : '';
+                                        let cls2 = row.highlight2 ? 'chart-highlight' : '';
+                                        document.write(`
+                                            <tr>
+                                                <td class="${cls1}">${row.f1}</td>
+                                                <td class="${cls1}">${row.i1}</td>
+                                                <td class="${cls1}">${row.m1}</td>
+                                                <td style="border: none; background: #f8fafc;"></td>
+                                                <td class="${cls2}">${row.f2}</td>
+                                                <td class="${cls2}">${row.i2}</td>
+                                                <td class="${cls2}">${row.m2}</td>
+                                            </tr>
+                                        `);
+                                    });
+                                </script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: Elbows 90° STD Hub -->
+            <div id="elbowsHub" class="app-section hidden">
+                <div class="card">
+                    <div class="card-header">Elbows 90° STD Specifications & Dimensions</div>
+                    <div style="padding: 15px;">
+                        <div class="sub-nav">
+                            <button class="sub-nav-btn active" onclick="switchElbowSub('sub_lr_mm', this)">01. Long Radius (mm)</button>
+                            <button class="sub-nav-btn" onclick="switchElbowSub('sub_sr_mm', this)">02. Short Radius (mm)</button>
+                            <button class="sub-nav-btn" onclick="switchElbowSub('sub_lr_in', this)">03. Long Radius (in)</button>
+                            <button class="sub-nav-btn" onclick="switchElbowSub('sub_sr_in', this)">04. Short Radius (in)</button>
+                        </div>
+
+                        <!-- Sub 1: Long Radius (mm) -->
+                        <div id="sub_lr_mm" class="sub-elbow-section">
+                            <div class="sketch-container">
+                                <div class="sketch-box">
+                                    <img src="Attachments\Elbow.png" alt="90° Long Radius Elbow Sketch">
+                                    <span>90° Long Radius (mm)</span>
+                                </div>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nominal Pipe Size (NPS)</th>
+                                        <th>DN</th>
+                                        <th>Outside Diameter at Bevel</th>
+                                        <th>90 Deg Elbows, A</th>
+                                        <th>45 Deg Elbows, B</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <script>
+                                        const lrMmData = [
+                                            {nps: "1/2", dn: "15", od: "21.3", a: "38", b: "16"},
+                                            {nps: "3/4", dn: "20", od: "26.7", a: "38", b: "19"},
+                                            {nps: "1", dn: "25", od: "33.4", a: "38", b: "22"},
+                                            {nps: "1 1/4", dn: "32", od: "42.2", a: "48", b: "25"},
+                                            {nps: "1 1/2", dn: "40", od: "48.3", a: "57", b: "29"},
+                                            {nps: "2", dn: "50", od: "60.3", a: "76", b: "35"},
+                                            {nps: "2 1/2", dn: "65", od: "73.0", a: "95", b: "44"},
+                                            {nps: "3", dn: "80", od: "88.9", a: "114", b: "51"},
+                                            {nps: "3 1/2", dn: "90", od: "101.6", a: "133", b: "57"},
+                                            {nps: "4", dn: "100", od: "114.3", a: "152", b: "64"},
+                                            {nps: "5", dn: "125", od: "141.3", a: "190", b: "79"},
+                                            {nps: "6", dn: "150", od: "168.3", a: "229", b: "95"},
+                                            {nps: "8", dn: "200", od: "219.1", a: "305", b: "127"},
+                                            {nps: "10", dn: "250", od: "273.0", a: "381", b: "159"},
+                                            {nps: "12", dn: "300", od: "323.8", a: "457", b: "190"},
+                                            {nps: "14", dn: "350", od: "355.6", a: "533", b: "222"},
+                                            {nps: "16", dn: "400", od: "406.4", a: "610", b: "254"},
+                                            {nps: "18", dn: "450", od: "457", a: "686", b: "286"},
+                                            {nps: "20", dn: "500", od: "508", a: "762", b: "318"},
+                                            {nps: "22", dn: "550", od: "559", a: "838", b: "343"},
+                                            {nps: "24", dn: "600", od: "610", a: "914", b: "381"},
+                                            {nps: "26", dn: "650", od: "660", a: "991", b: "405"},
+                                            {nps: "28", dn: "700", od: "711", a: "1067", b: "438"},
+                                            {nps: "30", dn: "750", od: "762", a: "1143", b: "470"},
+                                            {nps: "32", dn: "800", od: "813", a: "1219", b: "502"},
+                                            {nps: "34", dn: "850", od: "864", a: "1295", b: "533"},
+                                            {nps: "36", dn: "900", od: "914", a: "1372", b: "565"},
+                                            {nps: "38", dn: "950", od: "965", a: "1448", b: "600"},
+                                            {nps: "40", dn: "1000", od: "1016", a: "1524", b: "632"},
+                                            {nps: "42", dn: "1050", od: "1067", a: "1600", b: "660"},
+                                            {nps: "44", dn: "1100", od: "1118", a: "1676", b: "695"},
+                                            {nps: "46", dn: "1150", od: "1168", a: "1753", b: "727"},
+                                            {nps: "48", dn: "1200", od: "1219", a: "1829", b: "759"}
+                                        ];
+                                        lrMmData.forEach(row => {
+                                            document.write(`<tr><td>${row.nps}</td><td>${row.dn}</td><td>${row.od}</td><td>${row.a}</td><td>${row.b}</td></tr>`);
+                                        });
+                                    </script>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Sub 2: Short Radius (mm) -->
+                        <div id="sub_sr_mm" class="sub-elbow-section hidden">
+                            <div class="sketch-container">
+                                <div class="sketch-box">
+                                    <img src="Attachments\Elbow.png" alt="90° Short Radius Elbow Sketch">
+                                    <span>90° Short Radius (mm)</span>
+                                </div>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nominal Pipe Size (NPS)</th>
+                                        <th>DN</th>
+                                        <th>Outside Diameter at Bevel</th>
+                                        <th>Center-to-End, A</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <script>
+                                        const srMmData = [
+                                            {nps: "1", dn: "25", od: "33.4", a: "25"},
+                                            {nps: "1 1/4", dn: "32", od: "42.2", a: "32"},
+                                            {nps: "1 1/2", dn: "40", od: "48.3", a: "38"},
+                                            {nps: "2", dn: "50", od: "60.3", a: "51"},
+                                            {nps: "2 1/2", dn: "65", od: "73.0", a: "64"},
+                                            {nps: "3", dn: "80", od: "88.9", a: "76"},
+                                            {nps: "3 1/2", dn: "90", od: "101.6", a: "89"},
+                                            {nps: "4", dn: "100", od: "114.3", a: "102"},
+                                            {nps: "5", dn: "125", od: "141.3", a: "127"},
+                                            {nps: "6", dn: "150", od: "168.3", a: "152"},
+                                            {nps: "8", dn: "200", od: "219.1", a: "203"},
+                                            {nps: "10", dn: "250", od: "273.0", a: "254"},
+                                            {nps: "12", dn: "300", od: "323.8", a: "305"},
+                                            {nps: "14", dn: "350", od: "355.6", a: "356"},
+                                            {nps: "16", dn: "400", od: "406.4", a: "406"},
+                                            {nps: "18", dn: "450", od: "457", a: "457"},
+                                            {nps: "20", dn: "500", od: "508", a: "508"},
+                                            {nps: "22", dn: "550", od: "559", a: "559"},
+                                            {nps: "24", dn: "600", od: "610", a: "610"}
+                                        ];
+                                        srMmData.forEach(row => {
+                                            document.write(`<tr><td>${row.nps}</td><td>${row.dn}</td><td>${row.od}</td><td>${row.a}</td></tr>`);
+                                        });
+                                    </script>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Sub 3: Long Radius (in) -->
+                        <div id="sub_lr_in" class="sub-elbow-section hidden">
+                            <div class="sketch-container">
+                                <div class="sketch-box">
+                                    <img src="Attachments\Elbow.png" alt="90° Long Radius Elbow Sketch (Inches)">
+                                    <span>90° Long Radius (inches)</span>
+                                </div>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>NPS</th>
+                                        <th>OD</th>
+                                        <th>90° A</th>
+                                        <th>45° B</th>
+                                        <th>NPS</th>
+                                        <th>OD</th>
+                                        <th>90° A</th>
+                                        <th>45° B</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <script>
+                                        const lrInData = [
+                                            {nps1: "1/2", od1: "0.84", a1: "1.50", b1: "0.62", nps2: "16", od2: "16.00", a2: "24.00", b2: "10.00"},
+                                            {nps1: "3/4", od1: "1.05", a1: "1.50", b1: "0.75", nps2: "18", od2: "18.00", a2: "27.00", b2: "11.25"},
+                                            {nps1: "1", od1: "1.32", a1: "1.50", b1: "0.88", nps2: "20", od2: "20.00", a2: "30.00", b2: "12.50"},
+                                            {nps1: "1 1/4", od1: "1.66", a1: "1.88", b1: "1.00", nps2: "22", od2: "22.00", a2: "33.00", b2: "13.50"},
+                                            {nps1: "1 1/2", od1: "1.90", a1: "2.25", b1: "1.12", nps2: "24", od2: "24.00", a2: "36.00", b2: "15.00"},
+                                            {nps1: "2", od1: "2.38", a1: "3.00", b1: "1.38", nps2: "26", od2: "26.00", a2: "39.00", b2: "16.00"},
+                                            {nps1: "2 1/2", od1: "2.88", a1: "3.75", b1: "1.75", nps2: "28", od2: "28.00", a2: "42.00", b2: "17.25"},
+                                            {nps1: "3", od1: "3.50", a1: "4.50", b1: "2.00", nps2: "30", od2: "30.00", a2: "45.00", b2: "18.50"},
+                                            {nps1: "3 1/2", od1: "4.00", a1: "5.25", b1: "2.25", nps2: "32", od2: "32.00", a2: "48.00", b2: "19.75"},
+                                            {nps1: "4", od1: "4.50", a1: "6.00", b1: "2.50", nps2: "34", od2: "34.00", a2: "51.00", b2: "21.00"},
+                                            {nps1: "5", od1: "5.56", a1: "7.50", b1: "3.12", nps2: "36", od2: "36.00", a2: "54.00", b2: "22.25"},
+                                            {nps1: "6", od1: "6.62", a1: "9.00", b1: "3.75", nps2: "38", od2: "38.00", a2: "57.00", b2: "23.62"},
+                                            {nps1: "8", od1: "8.62", a1: "12.00", b1: "5.00", nps2: "40", od2: "40.00", a2: "60.00", b2: "24.88"},
+                                            {nps1: "10", od1: "10.75", a1: "15.00", b1: "6.25", nps2: "42", od2: "42.00", a2: "63.00", b2: "26.00"},
+                                            {nps1: "12", od1: "12.75", a1: "18.00", b1: "7.50", nps2: "44", od2: "44.00", a2: "66.00", b2: "27.38"},
+                                            {nps1: "14", od1: "14.00", a1: "21.00", b1: "8.75", nps2: "46", od2: "46.00", a2: "69.00", b2: "28.62"},
+                                            {nps1: "", od1: "", a1: "", b1: "", nps2: "48", od2: "48.00", a2: "72.00", b2: "29.88"}
+                                        ];
+                                        lrInData.forEach(row => {
+                                            document.write(`<tr>
+                                                <td>${row.nps1}</td><td>${row.od1}</td><td>${row.a1}</td><td>${row.b1}</td>
+                                                <td>${row.nps2}</td><td>${row.od2}</td><td>${row.a2}</td><td>${row.b2}</td>
+                                            </tr>`);
+                                        });
+                                    </script>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Sub 4: Short Radius (in) -->
+                        <div id="sub_sr_in" class="sub-elbow-section hidden">
+                            <div class="sketch-container">
+                                <div class="sketch-box">
+                                    <img src="Attachments\Elbow.png" alt="90° Short Radius Elbow Sketch (Inches)">
+                                    <span>90° Short Radius (inches)</span>
+                                </div>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nominal Pipe Size (NPS)</th>
+                                        <th>Outside Diameter at Bevel</th>
+                                        <th>Center-to-End, A</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <script>
+                                        const srInData = [
+                                            {nps: "1", od: "1.32", a: "1.00"},
+                                            {nps: "1 1/4", od: "1.66", a: "1.25"},
+                                            {nps: "1 1/2", od: "1.90", a: "1.50"},
+                                            {nps: "2", od: "2.38", a: "2.00"},
+                                            {nps: "2 1/2", od: "2.88", a: "2.50"},
+                                            {nps: "3", od: "3.50", a: "3.00"},
+                                            {nps: "3 1/2", od: "4.00", a: "3.40"},
+                                            {nps: "4", od: "4.50", a: "4.00"},
+                                            {nps: "5", od: "5.56", a: "5.00"},
+                                            {nps: "6", od: "6.62", a: "6.00"},
+                                            {nps: "8", od: "8.62", a: "8.00"},
+                                            {nps: "10", od: "10.75", a: "10.00"},
+                                            {nps: "12", od: "12.75", a: "12.00"},
+                                            {nps: "14", od: "14.00", a: "14.00"},
+                                            {nps: "16", od: "16.00", a: "16.00"},
+                                            {nps: "18", od: "18.00", a: "18.00"},
+                                            {nps: "20", od: "20.00", a: "20.00"},
+                                            {nps: "22", od: "22.00", a: "22.00"},
+                                            {nps: "24", od: "24.00", a: "24.00"}
+                                        ];
+                                        srInData.forEach(row => {
+                                            document.write(`<tr><td>${row.nps}</td><td>${row.od}</td><td>${row.a}</td></tr>`);
+                                        });
+                                    </script>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: Tekla Connection Component Numbers -->
+            <div id="teklaHub" class="app-section hidden">
+                <div class="card">
+                    <div class="card-header">Tekla Connection Component Numbers Reference</div>
+                    <div style="padding: 15px; overflow-x: auto;">
+                        <table style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10%;">S.NO</th>
+                                    <th style="width: 35%;">NAME</th>
+                                    <th style="width: 40%;">TYPE</th>
+                                    <th style="width: 15%;">CONNECTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <script>
+                                    const teklaData = [
+                                        {sno: "1", name: "BASEPLATE", type: "SIMPLE<br>TEMPLATE GROUT", conn: "1004;1042<br>1047"},
+                                        {sno: "2", name: "ENDPLATE", type: "PLATE ONLY<br>END PLATE", conn: "1002<br>144"},
+                                        {sno: "3", name: "CLIPANGLE", type: "CLIP ANGLE", conn: "141"},
+                                        {sno: "4", name: "SIMPLE SHEAR", type: "SKEW", conn: "146"},
+                                        {sno: "5", name: "MITER", type: "MITER CORNERS", conn: "41"},
+                                        {sno: "6", name: "WELDED FRAME", type: "BEAM TO BEAM WELDED", conn: "123"},
+                                        {sno: "7", name: "STIFFENER", type: "STIFFENER ONLY [B/S]", conn: "1003"},
+                                        {sno: "8", name: "COLUMAN TO BEAM", type: "DOUBLER PLATE<br>BEND PLATE<br>COL WEB TO BEAM WITH STIFFENER<br>HSS THRU PL CONNECTION<br>Tapper<br>SHEAR<br>BOLTED MOMENT<br>MOMENT", conn: "186<br>190<br>S187,188<br>47,189<br>181<br>182<br>134<br>146;130"},
+                                        {sno: "9", name: "BRACE", type: "BRACE END CONNECTED WITH ONE MEMBER<br>BRACE END CONNECTED TWO MEMBER<br>HSS BRACE [NO RADIALSLOT]<br>WELDED BRACE CONNECTIONS<br>ROD BRACING<br>HSS BRACE WITH RADIAL SLOT<br>COMMON<br>STITCH PLATE TWIN PROFILE", conn: "11<br>60<br>20<br>10<br>S3<br>50<br>62,169,63,59<br>1046/S85"},
+                                        {sno: "10", name: "LADDER", type: "GAGE LADDER<br>CAGE LADDER MORE OPTIONS", conn: "S35<br>S60"},
+                                        {sno: "11", name: "STAIR", type: "STAIR<br>STAIR BOTTOM CONNECTION<br>PIPE CUTTING<br>RAIL CORNOR CONNECTION<br>CONCRETE STAIR<br>Z PAN STAIR<br>STAIR BASE<br>RAIL POST AT STRINGER TOP<br>HAND RAIL PLACAING", conn: "S71<br>1023<br>23<br>41<br>7<br>S74<br>1043<br>101&nbsp;<br>1024"},
+                                        {sno: "12", name: "HANDRAIL", type: "BASE CONECTION<br>CHANNEL BACK TO RAIL POST<br>CHANNELWEB TO RAIL POST<br>Elbow<br>STIFFENERPL TO RAIL POST<br>RAIL TO POST CUT<br>TOP, MID RAIL<br>KICK PLATES<br>POST PLACEMENT<br>WALL RAIL<br>STIFFENERPL TO RAIL POST", conn: "144<br>83<br>86<br>89<br>69<br>23<br>S77<br>S75<br>S76<br>WALL RAIL<br>69"},
+                                        {sno: "13", name: "STIFFENER", type: "STIFFENER<br>MULTI STIFFENER<br>HORIZONTAL STIFFENER<br>CAP PLATE CONNECTION", conn: "1003<br>1064<br>1017<br>1002"},
+                                        {sno: "14", name: "BEAM TO BEAM/column", type: "SIMPLE SHEAR<br>FULL DEPTH CONNECTION<br>SHEAR PLATE WELDED TO TOP FLANGE<br>SHEAR PLATE WELDED TO BOTTOM FLANGE<br>2 side bolt sharing<br>FULL DEPTH TAPPER BEAM", conn: "146<br>184;185<br>147;149<br>129<br>143,33<br>64"},
+                                        {sno: "15", name: "JOIST CONNECTION", type: "-(SINGLEBEAM)JOISTCONNECTION<br>-(SINGLECOLUMN)JOISTCONNECTION<br>-(DOUBLECOLUMN)JOISTCONNECTION<br>-(SINGLECOLUMN2\"ndFLOOR)JOISTCONNECTION<br>-JOISTCONNECTION", conn: "160<br>161<br>162<br>163<br>164"},
+                                        {sno: "16", name: "ERECTOR ANGLE", type: "- ERECTOR ANGLE TOP & BTM", conn: "170; 1040"},
+                                        {sno: "17", name: "SPLICE CONNECTION", type: "- BEAM SPLICE (PLATE)<br>- BEAM SPLICE WITH LIFTING HOLE (PLATE)<br>- COLUMN SPLICE (PLATE)<br>- DIAGONAL SPLICE<br>- TUBE SPLICE<br>- COLUMN SPLICE (PLATE)<br>- BEAM TO BEAM SPLICE (2L ANGLE)<br>- L SPLICE<br>- MOOSE SPLICE", conn: "77<br>62<br>42<br>53<br>6<br>132<br>63<br>175<br>125"},
+                                        {sno: "18", name: "COMMEN CONNECTION", type: "- STIFFENED END PLATE<br>- SEATING CONNECTION<br>- STUB COLUMN<br>- COLUMN OVER BEAM WITH STIFFENER<br>- TWIN PROFILE CONNECTION<br>- WEB DOUBLER PLATE<br>- ROUND JOINING PLATE<br>- TURNBUCKLE BRACING", conn: "27<br>60<br>71<br>39<br>1046<br>1022<br>124<br>S3"}
+                                    ];
+                                    teklaData.forEach(row => {
+                                        document.write(`<tr>
+                                            <td>${row.sno}</td>
+                                            <td style="text-align: left; padding-left: 10px;">${row.name}</td>
+                                            <td style="text-align: left; padding-left: 10px;">${row.type}</td>
+                                            <td>${row.conn}</td>
+                                        </tr>`);
+                                    });
+                                </script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: Gage Metal Thickness -->
+            <div id="gaugeMetalHub" class="app-section hidden">
+                <div class="card">
+                    <div class="card-header">Sheet Metal Gauge Thickness Chart (to mm/inch Conversion)</div>
+                    <div style="padding: 15px; overflow-x: auto;">
+                        <table class="chart-table" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle;">Gauge Number</th>
+                                    <th colspan="2">Standard Steel</th>
+                                    <th colspan="2">Galvanized Steel</th>
+                                    <th colspan="2">Stainless Steel</th>
+                                    <th colspan="2">Aluminum, Brass, Copper</th>
+                                </tr>
+                                <tr>
+                                    <th>in</th>
+                                    <th>mm</th>
+                                    <th>in</th>
+                                    <th>mm</th>
+                                    <th>in</th>
+                                    <th>mm</th>
+                                    <th>in</th>
+                                    <th>mm</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <script>
+                                    const gaugeData = [
+                                        {g: "3", ss_in: "0.2391", ss_mm: "6.073", gs_in: "", gs_mm: "", st_in: "", st_mm: "", ab_in: "0.2294", ab_mm: "5.827"},
+                                        {g: "4", ss_in: "0.2242", ss_mm: "5.095", gs_in: "", gs_mm: "", st_in: "0.2344", st_mm: "5.954", ab_in: "0.2043", ab_mm: "5.189"},
+                                        {g: "5", ss_in: "0.2092", ss_mm: "5.314", gs_in: "", gs_mm: "", st_in: "0.2187", st_mm: "5.555", ab_in: "0.1819", ab_mm: "4.62"},
+                                        {g: "6", ss_in: "0.1943", ss_mm: "4.935", gs_in: "", gs_mm: "", st_in: "0.2031", st_mm: "5.159", ab_in: "0.162", ab_mm: "4.115"},
+                                        {g: "7", ss_in: "0.1793", ss_mm: "4.554", gs_in: "", gs_mm: "", st_in: "0.1875", st_mm: "4.763", ab_in: "0.1443", ab_mm: "3.665"},
+                                        {g: "8", ss_in: "0.1644", ss_mm: "4.176", gs_in: "", gs_mm: "", st_in: "0.165", st_mm: "4.191", ab_in: "0.1285", ab_mm: "3.264"},
+                                        {g: "9", ss_in: "0.1495", ss_mm: "3.797", gs_in: "0.1532", gs_mm: "3.891", st_in: "0.1562", st_mm: "3.967", ab_in: "0.1144", ab_mm: "2.906"},
+                                        {g: "10", ss_in: "0.1345", ss_mm: "3.416", gs_in: "0.1382", gs_mm: "3.51", st_in: "0.1406", st_mm: "3.571", ab_in: "0.1019", ab_mm: "2.588"},
+                                        {g: "11", ss_in: "0.1196", ss_mm: "3.038", gs_in: "0.1233", gs_mm: "3.132", st_in: "0.125", st_mm: "3.175", ab_in: "0.0907", ab_mm: "2.304"},
+                                        {g: "12", ss_in: "0.1046", ss_mm: "2.657", gs_in: "0.1084", gs_mm: "2.753", st_in: "0.1094", st_mm: "2.779", ab_in: "0.0808", ab_mm: "2.052"},
+                                        {g: "13", ss_in: "0.0897", ss_mm: "2.278", gs_in: "0.0934", gs_mm: "2.372", st_in: "0.0937", st_mm: "2.38", ab_in: "0.072", ab_mm: "1.829"},
+                                        {g: "14", ss_in: "0.0747", ss_mm: "1.897", gs_in: "0.0785", gs_mm: "1.994", st_in: "0.0781", st_mm: "1.984", ab_in: "0.0641", ab_mm: "1.628"},
+                                        {g: "15", ss_in: "0.0673", ss_mm: "1.709", gs_in: "0.071", gs_mm: "1.803", st_in: "0.0703", st_mm: "1.786", ab_in: "0.0571", ab_mm: "1.45"},
+                                        {g: "16", ss_in: "0.0598", ss_mm: "1.519", gs_in: "0.0635", gs_mm: "1.613", st_in: "0.0625", st_mm: "1.588", ab_in: "0.0508", ab_mm: "1.29"},
+                                        {g: "17", ss_in: "0.0538", ss_mm: "1.367", gs_in: "0.0575", gs_mm: "1.461", st_in: "0.0562", st_mm: "1.427", ab_in: "0.0453", ab_mm: "1.151"},
+                                        {g: "18", ss_in: "0.0478", ss_mm: "1.214", gs_in: "0.0516", gs_mm: "1.311", st_in: "0.05", st_mm: "1.27", ab_in: "0.0403", ab_mm: "1.024"},
+                                        {g: "19", ss_in: "0.0418", ss_mm: "1.062", gs_in: "0.0456", gs_mm: "1.158", st_in: "0.0437", st_mm: "1.11", ab_in: "0.0359", ab_mm: "0.912"},
+                                        {g: "20", ss_in: "0.0359", ss_mm: "0.912", gs_in: "0.0396", gs_mm: "1.006", st_in: "0.0375", st_mm: "0.953", ab_in: "0.032", ab_mm: "0.813"},
+                                        {g: "21", ss_in: "0.0329", ss_mm: "0.836", gs_in: "0.0366", gs_mm: "0.93", st_in: "0.0344", st_mm: "0.874", ab_in: "0.0285", ab_mm: "0.724"},
+                                        {g: "22", ss_in: "0.0299", ss_mm: "0.759", gs_in: "0.0336", gs_mm: "0.853", st_in: "0.0312", st_mm: "0.792", ab_in: "0.0253", ab_mm: "0.643"},
+                                        {g: "23", ss_in: "0.0269", ss_mm: "0.683", gs_in: "0.0306", gs_mm: "0.777", st_in: "0.0281", st_mm: "0.714", ab_in: "0.0226", ab_mm: "0.574"},
+                                        {g: "24", ss_in: "0.0239", ss_mm: "0.607", gs_in: "0.0276", gs_mm: "0.701", st_in: "0.025", st_mm: "0.635", ab_in: "0.0211", ab_mm: "0.536"},
+                                        {g: "25", ss_in: "0.0209", ss_mm: "0.531", gs_in: "0.0247", gs_mm: "0.627", st_in: "0.0219", st_mm: "0.556", ab_in: "0.0179", ab_mm: "0.455"},
+                                        {g: "26", ss_in: "0.0179", ss_mm: "0.455", gs_in: "0.0217", gs_mm: "0.551", st_in: "0.0187", st_mm: "0.475", ab_in: "0.0159", ab_mm: "0.404"},
+                                        {g: "27", ss_in: "0.0164", ss_mm: "0.417", gs_in: "0.0202", gs_mm: "0.513", st_in: "0.0172", st_mm: "0.437", ab_in: "0.0142", ab_mm: "0.361"},
+                                        {g: "28", ss_in: "0.0149", ss_mm: "0.378", gs_in: "0.0187", gs_mm: "0.475", st_in: "0.0156", st_mm: "0.396", ab_in: "0.0126", ab_mm: "0.32"},
+                                        {g: "29", ss_in: "0.0135", ss_mm: "0.343", gs_in: "0.0172", gs_mm: "0.437", st_in: "0.0141", st_mm: "0.358", ab_in: "0.0113", ab_mm: "0.287"},
+                                        {g: "30", ss_in: "0.012", ss_mm: "0.305", gs_in: "0.0157", gs_mm: "0.399", st_in: "0.0125", st_mm: "0.318", ab_in: "0.01", ab_mm: "0.254"},
+                                        {g: "31", ss_in: "0.0105", ss_mm: "0.267", gs_in: "0.0142", gs_mm: "0.361", st_in: "0.0109", st_mm: "0.277", ab_in: "0.0089", ab_mm: "0.226"},
+                                        {g: "32", ss_in: "0.0097", ss_mm: "0.246", gs_in: "0.0134", gs_mm: "0.34", st_in: "0.0102", st_mm: "0.259", ab_in: "0.008", ab_mm: "0.203"},
+                                        {g: "33", ss_in: "0.009", ss_mm: "0.229", gs_in: "", gs_mm: "", st_in: "0.0094", st_mm: "0.239", ab_in: "0.0071", ab_mm: "0.18"},
+                                        {g: "34", ss_in: "0.0082", ss_mm: "0.208", gs_in: "", gs_mm: "", st_in: "0.0086", st_mm: "0.218", ab_in: "0.0063", ab_mm: "0.16"},
+                                        {g: "35", ss_in: "0.0075", ss_mm: "0.191", gs_in: "", gs_mm: "", st_in: "0.0078", st_mm: "0.198", ab_in: "0.0056", ab_mm: "0.142"},
+                                        {g: "36", ss_in: "0.0067", ss_mm: "0.17", gs_in: "", gs_mm: "", st_in: "0.007", st_mm: "0.178", ab_in: "0.005", ab_mm: "0.127"},
+                                        {g: "37", ss_in: "0.0064", ss_mm: "0.163", gs_in: "", gs_mm: "", st_in: "0.0066", st_mm: "0.168", ab_in: "0.00445", ab_mm: "0.113"},
+                                        {g: "38", ss_in: "0.0067", ss_mm: "0.17", gs_in: "", gs_mm: "", st_in: "0.0062", st_mm: "0.157", ab_in: "0.00396", ab_mm: "0.101"}
+                                    ];
+                                    gaugeData.forEach(row => {
+                                        document.write(`<tr>
+                                            <td class="chart-highlight">${row.g}</td>
+                                            <td>${row.ss_in}</td><td>${row.ss_mm}</td>
+                                            <td>${row.gs_in}</td><td>${row.gs_mm}</td>
+                                            <td>${row.st_in}</td><td>${row.st_mm}</td>
+                                            <td>${row.ab_in}</td><td>${row.ab_mm}</td>
+                                        </tr>`);
+                                    });
+                                </script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 6: Fillet Encroachment Hub -->
+            <div id="filletEncroachmentHub" class="app-section hidden">
+                <div class="card">
+                    <div class="card-header">Fillet Encroachment Specifications & Dimensions</div>
+                    <div style="padding: 15px;">
+                        <div class="sub-nav">
+                            <button class="sub-nav-btn active" onclick="switchFilletSub('sub_fillet_metric', this)">Fillet Encroachment (Metric)</button>
+                            <button class="sub-nav-btn" onclick="switchFilletSub('sub_fillet_imperial', this)">Fillet Encroachment (Imperial)</button>
+                        </div>
+
+                        <!-- Sub 1: Fillet Encroachment (Metric) -->
+                        <div id="sub_fillet_metric" class="sub-fillet-section">
+                            <div class="sketch-container">
+                                <div class="sketch-box">
+                                    <img src="Attachments\Fillet Encroachment (Metric).png" alt="Fillet Encroachment Metric Sketch">
+                                    <span>Fillet Encroachment - CSA (mm)</span>
+                                </div>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Fillet Radius k - t (mm)</th>
+                                        <th>Encroachment (mm)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <script>
+                                        const filletMetricData = [
+                                            {kt: "8", encr: "3"},
+                                            {kt: "9", encr: "4"},
+                                            {kt: "10", encr: "4"},
+                                            {kt: "12", encr: "4"},
+                                            {kt: "14", encr: "5"},
+                                            {kt: "16", encr: "5"},
+                                            {kt: "18", encr: "5"},
+                                            {kt: "20", encr: "6"},
+                                            {kt: "22", encr: "6"},
+                                            {kt: "24", encr: "6"},
+                                            {kt: "26", encr: "7"}
+                                        ];
+                                        filletMetricData.forEach(row => {
+                                            document.write(`<tr><td>${row.kt}</td><td>${row.encr}</td></tr>`);
+                                        });
+                                    </script>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Sub 2: Fillet Encroachment (Imperial) -->
+                        <div id="sub_fillet_imperial" class="sub-fillet-section hidden">
+                            <div class="sketch-container">
+                                <div class="sketch-box">
+                                    <img src="Attachments\Fillet Encroachment (Imperial).png" alt="Fillet Encroachment Imperial Sketch">
+                                    <span>Fillet Encroachment - AISC (inches)</span>
+                                </div>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>k<sub>det</sub> - t<sub>f</sub> (in.)</th>
+                                        <th>Encr. (in.)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <script>
+                                        const filletImperialData = [
+                                            {kt: "5/16", encr: "1/8"},
+                                            {kt: "3/8 to 1/2", encr: "3/16"},
+                                            {kt: "9/16 to 13/16", encr: "1/4"},
+                                            {kt: "7/8 to 1 1/4", encr: "5/16"},
+                                            {kt: "1 5/16 and 1 3/8", encr: "3/8"}
+                                        ];
+                                        filletImperialData.forEach(row => {
+                                            document.write(`<tr><td>${row.kt}</td><td>${row.encr}</td></tr>`);
+                                        });
+                                    </script>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 7: Plate Bending Radius Hub -->
+            <div id="plateBendingHub" class="app-section hidden">
+                <div class="card">
+                    <div class="card-header">Plate Bending Inside Radius Specifications</div>
+                    <div style="padding: 15px;">
+                        <div class="sketch-container">
+                            <div class="sketch-box">
+                                <img src="Attachments\Plate Bending.png" alt="Plate Bending Inside Radius Sketch">
+                                <span>Inside radius as a function of plate thickness (t)</span>
+                            </div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ASTM Designation</th>
+                                    <th>Up to 3/4</th>
+                                    <th>Over 3/4 to 1</th>
+                                    <th>Over 1 to 2</th>
+                                    <th>Over 2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>A36, A572-42</td>
+                                    <td>1 1/2 t</td>
+                                    <td>1 1/2 t</td>
+                                    <td>1 1/2 t</td>
+                                    <td>2 t</td>
+                                </tr>
+                                <tr>
+                                    <td>A242, A529-50, A529-55, A572-50, A588, A992</td>
+                                    <td>1 1/2 t</td>
+                                    <td>1 1/2 t</td>
+                                    <td>2 t</td>
+                                    <td>2 1/2 t</td>
+                                </tr>
+                                <tr>
+                                    <td>A572-55, A852</td>
+                                    <td>1 1/2 t</td>
+                                    <td>1 1/2 t</td>
+                                    <td>2 1/2 t</td>
+                                    <td>3 t</td>
+                                </tr>
+                                <tr>
+                                    <td>A572-60, A572-65</td>
+                                    <td>1 1/2 t</td>
+                                    <td>1 1/2 t</td>
+                                    <td>3 t</td>
+                                    <td>3 1/2 t</td>
+                                </tr>
+                                <tr>
+                                    <td>A514</td>
+                                    <td>1 3/4 t</td>
+                                    <td>2 1/4 t</td>
+                                    <td>4 1/2 t</td>
+                                    <td>5 1/2 t</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Calculators added at the bottom as requested -->
+                        <div style="margin-top: 25px; display: flex; gap: 20px; flex-wrap: wrap;">
+                            <!-- Imperial Measurement Calculator -->
+                            <div style="flex: 1; min-width: 300px; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; background: #f8fafc;">
+                                <h4 style="text-align: center; margin-top: 0; color: var(--primary-dark);">Imperial Measurement Calculator</h4>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <th>Inch (0-11)</th>
+                                        <th>Fraction (0-15/16)</th>
+                                        <th>Multiplier</th>
+                                        <th>(R) Value</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="number" id="imp_in" value="1" min="0" max="11" oninput="calculatePlateImperial()">
+                                        </td>
+                                        <td>
+                                            <select id="imp_fr" onchange="calculatePlateImperial()">
+                                                <script>
+                                                    fractions16.forEach(f => {
+                                                        let sel = (f.val === 2) ? 'selected' : '';
+                                                        document.write(`<option value="${f.val}" ${sel}>${f.label}</option>`);
+                                                    });
+                                                </script>
+                                            </select>
+                                        </td>
+                                        <td><input type="number" id="imp_multiplier" value="1.5" step="0.25" oninput="calculatePlateImperial()"></td>
+                                        <td class="output-cell" id="imp_result">1.50 in</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- Metric Measurement Calculator -->
+                            <div style="flex: 1; min-width: 300px; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; background: #f8fafc;">
+                                <h4 style="text-align: center; margin-top: 0; color: var(--primary-dark);">Metric Measurement Calculator</h4>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <th>Plate Thickness (mm)</th>
+                                        <th>Multiplier (e.g. 1.5)</th>
+                                        <th>(R) Value (mm)</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" id="met_thickness" value="20" step="1" oninput="calculatePlateMetric()"></td>
+                                        <td><input type="number" id="met_multiplier" value="1.5" step="0.25" oninput="calculatePlateMetric()"></td>
+                                        <td class="output-cell" id="met_result">30.00 mm</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 8: Text Size on Drawings -->
+            <div id="textSizeHub" class="app-section hidden">
+                <div class="card">
+                    <div class="card-header">Text Size on Drawings Standards</div>
+                    <div style="padding: 15px;">
+                        <div class="sub-nav">
+                            <button class="sub-nav-btn active" onclick="switchTextSub('sub_text_metric', this)">Metric Standard</button>
+                            <button class="sub-nav-btn" onclick="switchTextSub('sub_text_imperial', this)">Imperial Standard</button>
+                        </div>
+
+                        <!-- Sub 1: Metric Standard -->
+                        <div id="sub_text_metric" class="sub-text-section">
+                            <h3 style="color: var(--primary-dark); margin-top: 10px;">Erection Drawings</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S.NO</th>
+                                        <th>SHEET</th>
+                                        <th>SHEET SIZE</th>
+                                        <th>PART MARK SIZE</th>
+                                        <th>DIMENSION SIZE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>A1</td>
+                                        <td>841X594</td>
+                                        <td>3.5</td>
+                                        <td>3.5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h3 style="color: var(--primary-dark); margin-top: 20px;">Assembly Drawings</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S.NO</th>
+                                        <th>SHEET</th>
+                                        <th>SHEET SIZE</th>
+                                        <th>PART MARK SIZE</th>
+                                        <th>DIMENSION SIZE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>A1</td>
+                                        <td>841X594</td>
+                                        <td>3.5</td>
+                                        <td>3.5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>A2</td>
+                                        <td>594X420</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>A3</td>
+                                        <td>420X297</td>
+                                        <td>3</td>
+                                        <td>3</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h3 style="color: var(--primary-dark); margin-top: 20px;">Single Part Drawings</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S.NO</th>
+                                        <th>SHEET</th>
+                                        <th>SHEET SIZE</th>
+                                        <th>PART MARK SIZE</th>
+                                        <th>DIMENSION SIZE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>A4</td>
+                                        <td>203X266</td>
+                                        <td>NIL</td>
+                                        <td>2.5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h3 style="color: var(--primary-dark); margin-top: 20px;">Section Mark Standard (Metric)</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S.NO</th>
+                                        <th>SECTION MARK SIZE</th>
+                                        <th>SECTION MARK SOURCE DWG</th>
+                                        <th>VIEW LABEL SIZE</th>
+                                        <th>VIEW LABEL SOURCE DWG</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>3.5</td>
+                                        <td>3</td>
+                                        <td>5</td>
+                                        <td>4</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Sub 2: Imperial Standard -->
+                        <div id="sub_text_imperial" class="sub-text-section hidden">
+                            <h3 style="color: var(--primary-dark); margin-top: 10px;">Erection Drawings</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S.NO</th>
+                                        <th>SHEET</th>
+                                        <th>SHEET SIZE</th>
+                                        <th>PART MARK SIZE</th>
+                                        <th>DIMENSION SIZE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>A1</td>
+                                        <td>36"X24"</td>
+                                        <td>1/8</td>
+                                        <td>1/8</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h3 style="color: var(--primary-dark); margin-top: 20px;">Assembly Drawings</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S.NO</th>
+                                        <th>SHEET</th>
+                                        <th>SHEET SIZE</th>
+                                        <th>PART MARK SIZE</th>
+                                        <th>DIMENSION SIZE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>A1</td>
+                                        <td>36"X24"</td>
+                                        <td>1/8</td>
+                                        <td>1/8</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>A2</td>
+                                        <td>24"X18"</td>
+                                        <td>1/8</td>
+                                        <td>1/8</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>A3</td>
+                                        <td>17"X11"</td>
+                                        <td>3/32</td>
+                                        <td>3/32</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h3 style="color: var(--primary-dark); margin-top: 20px;">Single Part Drawings</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S.NO</th>
+                                        <th>SHEET</th>
+                                        <th>SHEET SIZE</th>
+                                        <th>PART MARK SIZE</th>
+                                        <th>DIMENSION SIZE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>A4</td>
+                                        <td>8 1/2"x11"</td>
+                                        <td>NIL</td>
+                                        <td>3/32</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h3 style="color: var(--primary-dark); margin-top: 20px;">Section Mark Standard (Imperial)</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>S.NO</th>
+                                        <th>SECTION MARK SIZE</th>
+                                        <th>SECTION MARK SOURCE DWG</th>
+                                        <th>VIEW LABEL SIZE</th>
+                                        <th>VIEW LABEL SOURCE DWG</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1/8</td>
+                                        <td>3/32</td>
+                                        <td>13/64</td>
+                                        <td>5/32</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 9: Nucor STD Grating Tread -->
+            <div id="nucorStdGratingTreadHub" class="app-section hidden">
+                <div class="card">
+                    <div class="card-header">Nucor STD Grating Tread Specifications & Dimensions</div>
+                    <div style="padding: 15px;">
+                        <div class="sketch-container">
+                            <div class="sketch-box">
+                                <img src="Attachments\Tread dimensions.png" alt="Tread dimensions">
+                                <span>Tread dimensions & Hole Patterns</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
+                            <!-- Table 1: End Plate Width and Hole Pattern Dimensions -->
+                            <div style="flex: 1; min-width: 320px;">
+                                <h3 style="color: var(--primary-dark); text-align: center; font-size: 1rem;">End Plate Width and Hole Pattern Dimensions</h3>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2" style="vertical-align: middle;"># OF BARS</th>
+                                            <th colspan="2">TREAD WIDTH<br>(Type 19-4 Only)</th>
+                                            <th colspan="2">"A" DIMENSION<br>(Outer Slot)</th>
+                                            <th colspan="2">"B" DIMENSION<br>(Inner Slot)</th>
+                                        </tr>
+                                        <tr>
+                                            <th>METRIC (mm)</th>
+                                            <th>IMPERIAL (inches)</th>
+                                            <th>METRIC (mm)</th>
+                                            <th>IMPERIAL (inches)</th>
+                                            <th>METRIC (mm)</th>
+                                            <th>IMPERIAL (inches)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>157</td>
+                                            <td>6 3/16</td>
+                                            <td>64</td>
+                                            <td>2 1/2</td>
+                                            <td>n/a</td>
+                                            <td>n/a</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>187</td>
+                                            <td>7 3/8</td>
+                                            <td>114</td>
+                                            <td>4 1/2</td>
+                                            <td>n/a</td>
+                                            <td>n/a</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>217</td>
+                                            <td>8 9/16</td>
+                                            <td>114</td>
+                                            <td>4 1/2</td>
+                                            <td>n/a</td>
+                                            <td>n/a</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>248</td>
+                                            <td>9 3/4</td>
+                                            <td>178</td>
+                                            <td>7</td>
+                                            <td>114</td>
+                                            <td>4 1/2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>278</td>
+                                            <td>10 15/16</td>
+                                            <td>178</td>
+                                            <td>7</td>
+                                            <td>114</td>
+                                            <td>4 1/2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td>308</td>
+                                            <td>12 1/8</td>
+                                            <td>178</td>
+                                            <td>7</td>
+                                            <td>114</td>
+                                            <td>4 1/2</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Table 2: End Plate Depth Dimensions -->
+                            <div style="flex: 1; min-width: 320px;">
+                                <h3 style="color: var(--primary-dark); text-align: center; font-size: 1rem;">End Plate Depth Dimensions</h3>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">GRATING DEPTH</th>
+                                            <th colspan="2">"C" DIMENSION</th>
+                                            <th colspan="2">"D" DIMENSION</th>
+                                        </tr>
+                                        <tr>
+                                            <th>METRIC (mm)</th>
+                                            <th>IMPERIAL (inches)</th>
+                                            <th>METRIC (mm)</th>
+                                            <th>IMPERIAL (inches)</th>
+                                            <th>METRIC (mm)</th>
+                                            <th>IMPERIAL (inches)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>19 to 32</td>
+                                            <td>3/4 to 1 1/4</td>
+                                            <td>44</td>
+                                            <td>1 3/4</td>
+                                            <td>64</td>
+                                            <td>2 1/2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>38 and up</td>
+                                            <td>1 1/2 and up</td>
+                                            <td>57</td>
+                                            <td>2 1/4</td>
+                                            <td>76</td>
+                                            <td>3</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<script>
+    const orderedFractionsMap = {
+        0: "0", 1: "1/16", 2: "1/8", 3: "3/16", 4: "1/4", 5: "5/16",
+        6: "3/8", 7: "7/16", 8: "1/2", 9: "9/16", 10: "5/8", 11: "11/16",
+        12: "3/4", 13: "13/16", 14: "7/8", 15: "15/16"
+    };
+
+    function switchTab(tabId, btnElement) {
+        document.querySelectorAll('.app-section').forEach(sec => sec.classList.add('hidden'));
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.remove('hidden');
+        btnElement.classList.add('active');
+    }
+
+    function switchBoltSub(subId, btnElement) {
+        let parentNav = btnElement.parentElement;
+        parentNav.querySelectorAll('.sub-nav-btn').forEach(btn => btn.classList.remove('active'));
+        
+        let sectionContainer = parentNav.parentElement;
+        sectionContainer.querySelectorAll('.sub-bolt-section').forEach(sec => sec.classList.add('hidden'));
+        
+        document.getElementById(subId).classList.remove('hidden');
+        btnElement.classList.add('active');
+    }
+
+    function switchSlotSub(subId, btnElement) {
+        let parentNav = btnElement.parentElement;
+        parentNav.querySelectorAll('.sub-nav-btn').forEach(btn => btn.classList.remove('active'));
+        
+        let sectionContainer = parentNav.parentElement;
+        sectionContainer.querySelectorAll('.sub-slot-section').forEach(sec => sec.classList.add('hidden'));
+        
+        document.getElementById(subId).classList.remove('hidden');
+        btnElement.classList.add('active');
+    }
+
+    function switchElbowSub(subId, btnElement) {
+        document.querySelectorAll('.sub-elbow-section').forEach(sec => sec.classList.add('hidden'));
+        document.querySelectorAll('.sub-nav-btn').forEach(btn => btn.classList.remove('active'));
+        
+        document.getElementById(subId).classList.remove('hidden');
+        btnElement.classList.add('active');
+    }
+
+    function switchFilletSub(subId, btnElement) {
+        let parentNav = btnElement.parentElement;
+        parentNav.querySelectorAll('.sub-nav-btn').forEach(btn => btn.classList.remove('active'));
+        
+        let sectionContainer = parentNav.parentElement;
+        sectionContainer.querySelectorAll('.sub-fillet-section').forEach(sec => sec.classList.add('hidden'));
+        
+        document.getElementById(subId).classList.remove('hidden');
+        btnElement.classList.add('active');
+    }
+
+    function switchTextSub(subId, btnElement) {
+        let parentNav = btnElement.parentElement;
+        parentNav.querySelectorAll('.sub-nav-btn').forEach(btn => btn.classList.remove('active'));
+        
+        let sectionContainer = parentNav.parentElement;
+        sectionContainer.querySelectorAll('.sub-text-section').forEach(sec => sec.classList.add('hidden'));
+        
+        document.getElementById(subId).classList.remove('hidden');
+        btnElement.classList.add('active');
+    }
+
+    function getFractionLabel(sixteenths) {
+        let normalized = Math.round(sixteenths);
+        let rem = normalized % 16;
+        return orderedFractionsMap[rem] || "0";
+    }
+
+    function convertArea(source) {
+        let sqM = 0, sqFt = 0, sqMm = 0, sqIn = 0;
+
+        if (source === 'sq_m') {
+            sqM = parseFloat(document.getElementById('sq_m_input').value) || 0;
+            sqFt = sqM * 10.76391041671;
+            sqMm = sqM * 1000000;
+            sqIn = sqM * 1550.0031000062;
+
+            document.getElementById('sq_ft_input').value = sqFt.toFixed(4);
+            document.getElementById('sq_mm_input').value = sqMm.toFixed(2);
+            document.getElementById('sq_in_input').value = sqIn.toFixed(4);
+        } else if (source === 'sq_ft') {
+            sqFt = parseFloat(document.getElementById('sq_ft_input').value) || 0;
+            sqM = sqFt / 10.76391041671;
+            sqMm = sqFt * 92903.04;
+            sqIn = sqFt * 144;
+
+            document.getElementById('sq_m_input').value = sqM.toFixed(4);
+            document.getElementById('sq_mm_input').value = sqMm.toFixed(2);
+            document.getElementById('sq_in_input').value = sqIn.toFixed(4);
+        } else if (source === 'sq_mm') {
+            sqMm = parseFloat(document.getElementById('sq_mm_input').value) || 0;
+            sqM = sqMm / 1000000;
+            sqFt = sqMm / 92903.04;
+            sqIn = sqMm / 645.16;
+
+            document.getElementById('sq_m_input').value = sqM.toFixed(4);
+            document.getElementById('sq_ft_input').value = sqFt.toFixed(4);
+            document.getElementById('sq_in_input').value = sqIn.toFixed(4);
+        } else if (source === 'sq_in') {
+            sqIn = parseFloat(document.getElementById('sq_in_input').value) || 0;
+            sqM = sqIn / 1550.0031000062;
+            sqFt = sqIn / 144;
+            sqMm = sqIn * 645.16;
+
+            document.getElementById('sq_m_input').value = sqM.toFixed(4);
+            document.getElementById('sq_ft_input').value = sqFt.toFixed(4);
+            document.getElementById('sq_mm_input').value = sqMm.toFixed(2);
+        }
+    }
+
+    function calculateArithmetic() {
+        let op = document.getElementById('arith_op').value;
+        let ft1 = parseFloat(document.getElementById('ar_ft1').value) || 0;
+        let in1 = parseFloat(document.getElementById('ar_in1').value) || 0;
+        let fr1 = parseFloat(document.getElementById('ar_fr1').value) || 0;
+
+        let ft2 = parseFloat(document.getElementById('ar_ft2').value) || 0;
+        let in2 = parseFloat(document.getElementById('ar_in2').value) || 0;
+        let fr2 = parseFloat(document.getElementById('ar_fr2').value) || 0;
+
+        let total16_1 = (ft1 * 12 + in1) * 16 + fr1;
+        let total16_2 = (ft2 * 12 + in2) * 16 + fr2;
+        let res16 = 0;
+
+        if (op === 'add') {
+            res16 = total16_1 + total16_2;
+        } else if (op === 'sub') {
+            res16 = total16_1 - total16_2;
+            if (res16 < 0) res16 = 0;
+        } else if (op === 'mul') {
+            let factor = ft2 + in2 / 12 + fr2 / 192;
+            res16 = Math.round(total16_1 * factor);
+        } else if (op === 'div') {
+            let divisor = ft2 + in2 / 12 + fr2 / 192;
+            if (divisor !== 0) {
+                res16 = Math.round(total16_1 / divisor);
+            }
+        }
+
+        let totalInches = res16 / 16;
+        let outFt = Math.floor(totalInches / 12);
+        let remInches = totalInches % 12;
+        let outIn = Math.floor(remInches);
+        let outFr16 = Math.round((remInches - outIn) * 16);
+
+        if (outFr16 === 16) {
+            outIn += 1;
+            outFr16 = 0;
+        }
+        if (outIn === 12) {
+            outFt += 1;
+            outIn = 0;
+        }
+
+        document.getElementById('res_ft').innerText = outFt;
+        document.getElementById('res_in').innerText = outIn;
+        document.getElementById('res_fr').innerText = getFractionLabel(outFr16);
+    }
+
+    function convertMmToImperial() {
+        let mm = parseFloat(document.getElementById('mm_input').value) || 0;
+        let totalInches = mm / 25.4;
+        let ft = Math.floor(totalInches / 12);
+        let remIn = totalInches % 12;
+        let inch = Math.floor(remIn);
+        let fr16 = Math.round((remIn - inch) * 16);
+
+        if (fr16 === 16) {
+            inch += 1;
+            fr16 = 0;
+        }
+        if (inch === 12) {
+            ft += 1;
+            inch = 0;
+        }
+
+        document.getElementById('mm_to_ft').innerText = ft;
+        document.getElementById('mm_to_in').innerText = inch;
+        document.getElementById('mm_to_fr').innerText = getFractionLabel(fr16);
+    }
+
+    function convertImperialToMm() {
+        let ft = parseFloat(document.getElementById('ft_in_ft').value) || 0;
+        let inch = parseFloat(document.getElementById('ft_in_in').value) || 0;
+        let fr = parseFloat(document.getElementById('ft_in_fr').value) || 0;
+
+        let totalInches = ft * 12 + inch + fr / 16;
+        let mm = totalInches * 25.4;
+
+        document.getElementById('ft_to_mm_result').innerText = mm.toFixed(2);
+    }
+
+    function convertFeetToInches() {
+        let ft = parseFloat(document.getElementById('ft_only_input').value) || 0;
+        let inches = ft * 12;
+        document.getElementById('ft_to_in_result').innerText = inches.toFixed(2);
+    }
+
+    function convertWeight(source) {
+        if (source === 'kg') {
+            let kg = parseFloat(document.getElementById('kg_input').value) || 0;
+            let lbf = kg * 2.20462262185;
+            document.getElementById('lbf_input').value = lbf.toFixed(2);
+        } else if (source === 'lbf') {
+            let lbf = parseFloat(document.getElementById('lbf_input').value) || 0;
+            let kg = lbf / 2.20462262185;
+            document.getElementById('kg_input').value = kg.toFixed(2);
+        }
+    }
+
+    function calculatePlateImperial() {
+        let inch = parseFloat(document.getElementById('imp_in').value) || 0;
+        let fr = parseFloat(document.getElementById('imp_fr').value) || 0;
+        let mult = parseFloat(document.getElementById('imp_multiplier').value) || 1.5;
+
+        let thicknessInches = inch + fr / 16;
+        let result = thicknessInches * mult;
+
+        let rFt = Math.floor(result / 12);
+        let rRemIn = result % 12;
+        let rIn = Math.floor(rRemIn);
+        let rFr = Math.round((rRemIn - rIn) * 16);
+
+        if (rFr === 16) { rIn++; rFr = 0; }
+        if (rIn === 12) { rFt++; rIn = 0; }
+
+        let fracStr = (rFr > 0) ? ` ${getFractionLabel(rFr)}` : '';
+        let displayStr = '';
+        if (rFt > 0) {
+            displayStr += `${rFt}' `;
+        }
+        displayStr += `${rIn}${fracStr} in (${result.toFixed(3)} in)`;
+
+        document.getElementById('imp_result').innerText = displayStr;
+    }
+
+    function calculatePlateMetric() {
+        let thickness = parseFloat(document.getElementById('met_thickness').value) || 0;
+        let mult = parseFloat(document.getElementById('met_multiplier').value) || 1.5;
+        let result = thickness * mult;
+        document.getElementById('met_result').innerText = result.toFixed(2) + " mm";
+    }
+</script>
+
+
+<script>
+(function () {
+    function enhanceTables() {
+        document.querySelectorAll('.card table:not(.slot-dimension-block table)').forEach(function (table) {
+            if (table.parentElement && table.parentElement.classList.contains('table-scroll')) return;
+            var wrapper = document.createElement('div');
+            wrapper.className = 'table-scroll';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        });
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', enhanceTables);
+    } else {
+        enhanceTables();
+    }
+})();
+</script>
+
+
+<script>
+(function () {
+    const body = document.body;
+    const toggle = document.getElementById('navToggle');
+    const sidebar = document.getElementById('detailNavigation');
+    const backdrop = document.getElementById('navBackdrop');
+
+    if (!toggle || !sidebar || !backdrop) return;
+
+    const mobileQuery = window.matchMedia('(max-width: 900px)');
+
+    function setNavigation(open) {
+        body.classList.toggle('nav-open', open);
+        body.classList.toggle('nav-collapsed', !open);
+        toggle.setAttribute('aria-expanded', String(open));
+        backdrop.setAttribute('aria-hidden', String(!open));
+    }
+
+    function syncInitialState() {
+        // Desktop: navigation starts visible.
+        // Tablet/mobile: navigation starts hidden for a cleaner working area.
+        setNavigation(!mobileQuery.matches);
+    }
+
+    toggle.addEventListener('click', function () {
+        const isOpen = body.classList.contains('nav-open') ||
+                       (!body.classList.contains('nav-collapsed') && !mobileQuery.matches);
+        setNavigation(!isOpen);
+    });
+
+    backdrop.addEventListener('click', function () {
+        if (mobileQuery.matches) setNavigation(false);
+    });
+
+    // Close the mobile drawer after selecting a section.
+    sidebar.querySelectorAll('.nav-btn').forEach(function (button) {
+        button.addEventListener('click', function () {
+            if (mobileQuery.matches) setNavigation(false);
+        });
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && mobileQuery.matches && body.classList.contains('nav-open')) {
+            setNavigation(false);
+            toggle.focus();
+        }
+    });
+
+    mobileQuery.addEventListener('change', syncInitialState);
+    syncInitialState();
+})();
+</script>
+
+</body>
+</html>
